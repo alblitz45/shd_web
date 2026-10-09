@@ -1,0 +1,18 @@
+{
+  "name": "avisos-escolares-server",
+  "version": "1.0.0",
+  "description": "Servidor de notificaciones push para Avisos Escolares",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "web-push": "^3.6.7"
+  }
+}

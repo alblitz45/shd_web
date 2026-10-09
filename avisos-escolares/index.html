@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Avisos Escolares UTCV</title>
+    <meta name="description" content="Aplicación de avisos escolares y tareas con notificaciones push">
+
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="shortcut icon" type="image/ico" href="img/favicon.ico"/>
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#4F46E5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <span id="salir-btn" class="header-btn header-btn--left oculto animated fadeIn">
+            <i class="fas fa-sign-out-alt"></i>
+        </span>
+        <h1 id="titulo">Avisos Escolares UTCV</h1>
+        <span id="nuevo-btn" class="header-btn header-btn--right oculto animated fadeIn fast">
+            <i class="fas fa-plus"></i>
+        </span>
+        <button id="theme-toggle" class="header-btn header-btn--theme" type="button" aria-label="Activar modo claro" title="Activar modo claro">
+            <i class="fas fa-sun" aria-hidden="true"></i>
+        </button>
+    </header>
+    <!-- Fin Header -->
+
+    <!-- Banner de Notificaciones Push -->
+    <div id="notif-banner" class="notif-banner oculto animated fadeIn fast">
+        <div class="notif-banner-content">
+            <div class="notif-banner-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="notif-banner-text">
+                <strong>Activar Notificaciones</strong>
+                <span>Recibe avisos de tareas y exámenes al instante</span>
+            </div>
+        </div>
+        <button id="notif-btn" class="notif-banner-btn">
+            <i class="fas fa-bell"></i> Activar
+        </button>
+    </div>
+    <!-- Fin Banner de Notificaciones -->
+
+    <!-- Modal Nuevo Aviso -->
+    <div id="modal" class="modal oculto">
+        <div class="modal-header">
+            <span id="cancel-btn" class="modal-close">
+                <i class="fas fa-times"></i>
+            </span>
+            <span id="titulo-modal">Nuevo Aviso</span>
+            <span id="modal-role-badge" class="role-badge">Maestro</span>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="txtMateria">
+                    <i class="fas fa-book"></i> Materia
+                </label>
+                <div class="select-wrap">
+                    <select id="txtMateria" class="input-field">
+                        <option value="" selected>Selecciona una materia</option>
+                        <option value="Gestión del desarrollo">📊 Gestión del desarrollo</option>
+                        <option value="Aplicaciones web">💻 Aplicaciones web</option>
+                        <option value="Integradora">📚 Integradora</option>
+                        <option value="Desarrollo móvil">📱 Desarrollo móvil</option>
+                        <option value="Creación de videojuegos">🎮 Creación de videojuegos</option>
+                        <option value="Inglés">🇬🇧 Inglés</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-chevron" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="selTipo">
+                    <i class="fas fa-tag"></i> Tipo de aviso
+                </label>
+                <div class="select-wrap">
+                    <select id="selTipo" class="input-field">
+                        <option value="tarea">📝 Tarea</option>
+                        <option value="examen">📋 Examen</option>
+                        <option value="aviso">📢 Aviso General</option>
+                        <option value="material">📦 Material</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-chevron" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="txtMensaje">
+                    <i class="fas fa-pencil-alt"></i> Mensaje
+                </label>
+                <textarea id="txtMensaje" placeholder="Escribe el aviso..." rows="4" class="input-field"></textarea>
+            </div>
+        </div>
+
+        <!-- Botón de enviar -->
+        <div id="post-btn" class="fab-send">
+            <i class="fas fa-paper-plane"></i>
+        </div>
+    </div>
+    <!-- Fin Modal -->
+
+    <!-- Selección de Rol -->
+    <div id="seleccion" class="seleccion animated fadeIn fast" align="center">
+        <div class="seleccion-intro">
+            <div class="seleccion-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h2>Bienvenido</h2>
+            <p>Selecciona tu rol para continuar</p>
+        </div>
+
+        <div class="seleccion-grid">
+            <div class="seleccion-card" data-user="maestro">
+                <div class="seleccion-card-icon maestro-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <span>Maestro</span>
+            </div>
+
+            <div class="seleccion-card" data-user="alumno">
+                <div class="seleccion-card-icon alumno-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <span>Alumno</span>
+            </div>
+        </div>
+    </div>
+    <!-- FIN Selección de Rol -->
+
+    <!-- Indicador Offline -->
+    <div id="offline-indicator" class="offline-indicator oculto">
+        <i class="fas fa-wifi-slash"></i>
+        <span>Sin conexión — Los avisos se enviarán cuando vuelva la red</span>
+    </div>
+
+    <!-- Lista de Avisos -->
+    <ul id="timeline" class="timeline oculto">
+
+        <!-- Aviso ejemplo -->
+        <li class="aviso-item animated fadeIn fast">
+            <div class="aviso-tipo-badge tipo-tarea">
+                <i class="fas fa-pencil-alt"></i>
+            </div>
+            <div class="aviso-content">
+                <div class="aviso-header-info">
+                    <span class="aviso-materia">Matemáticas</span>
+                    <span class="aviso-tipo-tag">Tarea</span>
+                </div>
+                <div class="aviso-mensaje">
+                    Resolver los ejercicios de la página 45 del libro para el viernes.
+                </div>
+                <div class="aviso-footer">
+                    <span class="aviso-autor"><i class="fas fa-chalkboard-teacher"></i> Maestro</span>
+                    <span class="aviso-hora"><i class="far fa-clock"></i> <time id="fecha-ejemplo"></time></span>
+                </div>
+            </div>
+        </li>
+        <!-- Fin Aviso ejemplo -->
+
+    </ul>
+    <!-- Fin Lista de Avisos -->
+
+    <!-- Indicador de sin avisos -->
+    <div id="empty-state" class="empty-state oculto">
+        <i class="fas fa-inbox"></i>
+        <p>No hay avisos aún</p>
+        <span>Los avisos aparecerán aquí</span>
+    </div>
+
+
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
